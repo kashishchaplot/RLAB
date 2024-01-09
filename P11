@@ -1,0 +1,23 @@
+library(readr)
+library(dplyr)
+library(readxl)
+customer_purchases <- read.csv("C:\Users\91772\OneDrive\Desktop\MSRIT\customer_purchases.csv")
+View(customer_purchases)
+purchase_data <- read_csv("customer_purchases.csv")
+total_records <- nrow(purchase_data)
+total_unique_customers <- n_distinct(purchase_data$Customer_ID)
+cat("Total number of records:", total_records, "\n")
+cat("Total number of unique customers:", total_unique_customers, "\n")
+mean_purchase_amount <- mean(purchase_data$Purchase_Amount)
+median_purchase_amount <- median(purchase_data$Purchase_Amount)
+std_dev_purchase_amount <- sd(purchase_data$Purchase_Amount)
+cat("Mean purchase amount:", mean_purchase_amount, "\n")
+
+cat("Median purchase amount:", median_purchase_amount, "\n")
+cat("Standard deviation of purchase amounts:", std_dev_purchase_amount,"\n")
+
+purchase_data$Segment <- ifelse(purchase_data$Purchase_Amount < median_purchase_amount, "Low Spender", "High Spender")
+print(purchase_data)
+hist(purchase_data$Purchase_Amount, main = "Distribution of Purchase
+Amounts", xlab = "Purchase Amount", col = "Red", border = "black")
+
